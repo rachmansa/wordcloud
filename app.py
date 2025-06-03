@@ -239,19 +239,7 @@ def main():
         # Tampilkan instruksi jika belum ada file yang diupload
         st.info("👆 Silakan upload file CSV di sidebar untuk memulai")
         
-        # Contoh format CSV
-        st.subheader("📝 Contoh Format CSV")
-        sample_data = {
-            'nama_produk': ['Laptop Gaming', 'Mouse Wireless', 'Keyboard Mechanical'],
-            'deskripsi': [
-                'Laptop gaming dengan performa tinggi untuk bermain game',
-                'Mouse wireless yang nyaman digunakan untuk kerja sehari-hari',
-                'Keyboard mechanical dengan switch yang responsif dan tahan lama'
-            ],
-            'kategori': ['Elektronik', 'Aksesoris', 'Aksesoris']
-        }
-        sample_df = pd.DataFrame(sample_data)
-        st.dataframe(sample_df, use_container_width=True)
+        
         
         st.markdown("""
         **Fitur Aplikasi:**
