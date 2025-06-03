@@ -168,11 +168,11 @@ def main():
                     with col2:
                         st.metric("Total Kata", len(words))
                     with col3:
-                        st.metric("Rata-rata Panjang Kata", f"{np.mean([len(w) for w in words]):.1f}")
+                        st.metric("Rata-rata Panjang Kata (Huruf)", f"{np.mean([len(w) for w in words]):.1f}")
                     
                     # Top 20 kata paling sering
-                    st.subheader("🔝 20 Kata Paling Sering Muncul")
-                    top_words = word_freq.most_common(20)
+                    st.subheader(" Kata Yang Muncul")
+                    top_words = word_freq.most_common(200)
                     
                     if top_words:
                         # Buat dataframe untuk ditampilkan
@@ -183,22 +183,15 @@ def main():
                             st.dataframe(top_df, use_container_width=True)
                         
                         with col2:
-                            # Buat bar chart
-                            fig, ax = plt.subplots(figsize=(10, 8))
+                            # Buat pie chart
+                            fig, ax = plt.subplots(figsize=(8, 8))
                             words_list = [item[0] for item in top_words[:10]]
                             freq_list = [item[1] for item in top_words[:10]]
                             
-                            bars = ax.barh(words_list, freq_list, color='skyblue')
-                            ax.set_xlabel('Frekuensi')
-                            ax.set_title('Top 10 Kata Paling Sering')
-                            ax.grid(axis='x', alpha=0.3)
+                            ax.pie(freq_list, labels=words_list, autopct='%1.1f%%', startangle=140)
+                            ax.set_title("Top 10 Kata Paling Sering (Pie Chart)")
+                            ax.axis('equal')  # Supaya bentuknya bulat sempurna
                             
-                            # Tambahkan nilai di ujung bar
-                            for bar, freq in zip(bars, freq_list):
-                                ax.text(bar.get_width() + 0.1, bar.get_y() + bar.get_height()/2, 
-                                       str(freq), va='center')
-                            
-                            plt.tight_layout()
                             st.pyplot(fig)
                     
                     # Download wordcloud
